@@ -8,6 +8,11 @@ module.exports = defineConfig({
     baseUrl: 'https://front.serverest.dev/', 
     video: true, 
     chromeWebSecurity: false, 
-    projectId: "xhyuhk"
+    projectId: "xhyuhk", 
+    defaultCommandTimeout: 10000,
+    retries: {
+      runMode: 2,
+      openMode: 0,
+    },
   },
 });

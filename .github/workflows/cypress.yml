@@ -25,13 +25,8 @@ jobs:
         with:
           node-version: '16'
 
-      - name: Install dependencies
+      - name: Instalar dependências
         run: npm install
 
-      - name: Run Cypress tests
-        uses: cypress-io/github-action@v5
-        with:
-          browser: ${{ matrix.browser }}
-          start: npm start
-          wait-on: http://localhost:3000
-          wait-on-timeout: 60
+      - name: Executar Testes do Cypress
+        run: npx cypress run --browser ${{ matrix.browser }}

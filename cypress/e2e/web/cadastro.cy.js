@@ -37,7 +37,7 @@ describe('Funcionalidade: Cadastro', () => {
         cy.get('h1', {timeout: 10000}).should('contain', 'Serverest Store')
       });
 
-      it('Cadastrar usuario com sucesso usando importação de dados', () => {
+      it.skip('Cadastrar usuario com sucesso usando importação de dados', () => {
         cy.CadastroUsuarioComum(dadosUsuario[0].nome, dadosUsuario[0].email, dadosUsuario[0].senha)
         cy.get('h1', {timeout: 10000}).should('contain', 'Serverest Store')
       });

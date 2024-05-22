@@ -1,5 +1,6 @@
 /// <reference types="cypress" />
 import { faker } from '@faker-js/faker';
+import dadosUsuario from '../../fixtures/usuarios.json'
 
 describe('Funcionalidade: Cadastro', () => {
 
@@ -9,30 +10,18 @@ describe('Funcionalidade: Cadastro', () => {
     
     it('Deve fazer o cadastro com sucesso (usando método Date.Now)', () => {
         var email = 'fabio' + Date.now() + '@teste.com'
-        cy.get('[data-testid="nome"]', ).clear().type('Fabio Teste')
-        cy.get('[data-testid="email"]').clear().type(email)
-        cy.get('[data-testid="password"]').clear().type('teste@123')
-        cy.get('[data-testid="checkbox"]').check()
-        cy.get('[data-testid="cadastrar"]').click()
+        cy.CadastroUsuarioComum('Fábio Araújo', email, 'teste@123')
         cy.get('.alert').should('contain', 'Cadastro realizado com sucesso')
       });
 
       it('Deve fazer o cadastro com sucesso (usando biblioteca Faker)', () => {
-        cy.get('[data-testid="nome"]', ).clear().type(faker.person.fullName())
-        cy.get('[data-testid="email"]').clear().type(faker.internet.email())
-        cy.get('[data-testid="password"]').clear().type(faker.internet.password())
-        cy.get('[data-testid="checkbox"]').check()
-        cy.get('[data-testid="cadastrar"]').click()
+        cy.CadastroUsuarioComum(faker.person.fullName(), faker.internet.email(), faker.internet.password())
         cy.get('.alert').should('contain', 'Cadastro realizado com sucesso')
       });
 
       it('Deve validar campo de email válido', () => {
-        cy.get('[data-testid="nome"]', ).clear().type('Fábio Araújo')
-        cy.get('[data-testid="email"]').clear().type('fabio!teste.com')
-        cy.get('[data-testid="password"]').clear().type('teste@123')
-        cy.get('[data-testid="checkbox"]').check()
-        cy.get('[data-testid="cadastrar"]').click()
-        //cy.contains('Inclua um "@" no endereço de e-mail').should('be.visible');
+        cy.CadastroUsuarioComum('Fabio teste', 'fabio!gmail.com', 'senha@123')
+         //cy.contains('Inclua um "@" no endereço de e-mail').should('be.visible');
 
       });
 
@@ -46,7 +35,11 @@ describe('Funcionalidade: Cadastro', () => {
         cy.CadastroUsuarioComum('Fabio teste',faker.internet.email(), 'senha@123')
         cy.get('.alert').should('contain', 'Cadastro realizado com sucesso')
         cy.get('h1', {timeout: 10000}).should('contain', 'Serverest Store')
-       
+      });
+
+      it('Cadastrar usuario com sucesso usando importação de dados', () => {
+        cy.CadastroUsuarioComum(dadosUsuario[0].nome, dadosUsuario[0].email, dadosUsuario[0].senha)
+        cy.get('h1', {timeout: 10000}).should('contain', 'Serverest Store')
       });
 
 

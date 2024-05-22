@@ -23,5 +23,15 @@ describe('Funcionalidade: Login', () => {
         cy.login('fabio@araujo.com', 'tesdfdfte@123')
         cy.get('.alert').should('contain', 'Email e/ou senha inválidos')
     });
+
+    it.only('Deve fazer login com sucesso usando fixture', () => {
+        cy.fixture('login').then((dadosLogin) =>{
+            cy.login(dadosLogin.email, dadosLogin.senha)
+        })
+        cy.get('h1').should('contain' , 'Serverest Store')
+
+
+
+    });
     
 });

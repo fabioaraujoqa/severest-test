@@ -14,11 +14,12 @@ jobs:
 
     strategy:
       matrix:
+        container: [1, 2] 
         browser: [chrome, firefox]
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Setup Node.js
         uses: actions/setup-node@v3
@@ -29,4 +30,4 @@ jobs:
         run: npm install
 
       - name: Executar Testes do Cypress
-        run: npx cypress run --browser ${{ matrix.browser }}
+        run: npx cypress run --parallel --browser ${{ matrix.browser }}

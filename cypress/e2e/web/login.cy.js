@@ -24,7 +24,7 @@ describe('Funcionalidade: Login', () => {
         cy.get('.alert').should('contain', 'Email e/ou senha inválidos')
     });
 
-    it.only('Deve fazer login com sucesso usando fixture', () => {
+    it('Deve fazer login com sucesso usando fixture', () => {
         cy.fixture('login').then((dadosLogin) =>{
             cy.login(dadosLogin.email, dadosLogin.senha)
         })

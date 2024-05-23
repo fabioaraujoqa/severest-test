@@ -14,7 +14,6 @@ jobs:
 
     strategy:
       matrix:
-        container: [1, 2] 
         browser: [chrome, firefox]
 
     steps:
@@ -30,4 +29,6 @@ jobs:
         run: npm install
 
       - name: Executar Testes do Cypress
-        run: npx cypress run --parallel --browser ${{ matrix.browser }}
+        run: npx cypress run --browser ${{ matrix.browser }}
+
+

@@ -21,7 +21,10 @@ describe('Funcionalidade: Cadastro', () => {
 
       it('Deve validar campo de email válido', () => {
         cy.CadastroUsuarioComum('Fabio teste', 'fabio!gmail.com', 'senha@123')
-         //cy.contains('Inclua um "@" no endereço de e-mail').should('be.visible');
+        cy.window().then((win) => {
+          const alertElement = win.document.querySelector('.seletor-do-elemento-alerta');
+          expect(alertElement).to.contain('Inclua um "@" no endereço de e-mail');
+        });
 
       });
 
@@ -31,7 +34,7 @@ describe('Funcionalidade: Cadastro', () => {
         cy.get('.lead',{timeout: 10000}).should('contain', 'Este é seu sistema para administrar seu ecommerce.')
       });
 
-      it('Deve fazer cadastro com sucesso sem admin- usando comando Customizado', () => {
+      it('Deve fazer cadastro com sucesso sem admin usando comando Customizado', () => {
         cy.CadastroUsuarioComum('Fabio teste',faker.internet.email(), 'senha@123')
         cy.get('.alert').should('contain', 'Cadastro realizado com sucesso')
         cy.get('h1', {timeout: 10000}).should('contain', 'Serverest Store')

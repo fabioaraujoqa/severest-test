@@ -49,4 +49,38 @@ Cypress.Commands.add('login', (email, senha) => {
     cy.get('[data-testid="cadastrar"]').click()
  })
 
+ Cypress.Commands.add('token', (email, senha) => {
+      cy.request({
+         method: 'POST', 
+         url: 'http://localhost:3000/login',
+         body: 
+            {
+               "email": email,
+               "password": senha
+            }
+      }).then((response) =>{
+         expect(response.status).equal(200)
+         return response.body.authorization
+      })
+ })
+
+
+ Cypress.Commands.add('cadastrarProduto', (tkn) =>{
+   var produto = `Produto teste ${Date.now()}`
+   cy.request({
+       method: 'POST',
+       url:  'http://localhost:3000/produtos',
+       body: {
+           "nome": produto,
+           "preco": 1001,
+           "descricao": "Comandos customizados...",
+           "quantidade": 1001
+         },
+         headers: {
+           authorization: tkn
+         }
+   })
+ })
+
+
 

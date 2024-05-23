@@ -9,10 +9,9 @@ module.exports = defineConfig({
     video: true, 
     chromeWebSecurity: false, 
     projectId: "xhyuhk", 
-    defaultCommandTimeout: 10000,
-    retries: {
-      runMode: 2,
-      openMode: 0,
+    env: {
+      local: 'https://localhost/3000/',
+      prod: 'https://serverest.dev/'
     },
   },
 });

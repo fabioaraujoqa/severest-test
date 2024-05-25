@@ -21,7 +21,7 @@ describe('API - Produtos', () => {
     });
 
     it('Deve cadastrar um produto com sucesso', function () {
-        var produto = `Produto teste ${Date.now()}`
+        let produto = `Produto teste ${Date.now()}`
         cy.request({
             method: 'POST',
             url: urlBase + 'produtos',
@@ -41,7 +41,7 @@ describe('API - Produtos', () => {
     });
 
     it('Deve alterar dados do produto com sucesso', function () {
-        var produtoAlterado = `Produto teste ${Date.now()}`
+        let produtoAlterado = `Produto teste ${Date.now()}`
         cy.cadastrarProduto(this.token)
             .then((response) => {
                 cy.log(response.body._id)

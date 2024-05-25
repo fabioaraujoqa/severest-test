@@ -8,7 +8,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node-version: [16.x, 17.x, 18.x]
+        node-version: [18.x]
     steps:
     - uses: actions/checkout@v4
     - name: Use Node.js ${{ matrix.node-version }}
@@ -16,5 +16,11 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
-    - run: npm install -f
-    - run: npm run report
+    - name: Install dependencies
+      run: npm install -f
+
+    - name: Start serverest in background
+      run: nohup npx serverest &
+
+    - name: Run tests
+      run: npm test

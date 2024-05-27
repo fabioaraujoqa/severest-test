@@ -1,0 +1,41 @@
+name: Cypress Tests with Allure
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  cypress-tests:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '16'
+
+    - name: Install dependencies
+      run: npm install
+
+    - name: Run Cypress tests
+      run: npm run test
+
+    - name: Install Allure
+      run: |
+        sudo apt-get install -y openjdk-11-jre
+        wget https://github.com/allure-framework/allure2/releases/download/2.13.8/allure-2.13.8.zip
+        unzip allure-2.13.8.zip -d /opt/
+        sudo ln -s /opt/allure-2.13.8/bin/allure /usr/bin/allure
+
+    - name: Generate Allure report
+      run: npm run allure:report
+
+    - name: Upload Allure report
+      uses: actions/upload-artifact@v3
+      with:
+        name: allure-report
+        path: allure-results/

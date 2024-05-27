@@ -24,12 +24,17 @@ jobs:
     - name: Run Cypress tests
       run: npm run test
 
+    - name: Install Homebrew
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y build-essential
+        /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+        echo 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"' >> /home/runner/.bash_profile
+        eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+
     - name: Install Allure
       run: |
-        sudo apt-get install -y openjdk-11-jre
-        wget https://github.com/allure-framework/allure2/releases/download/2.13.8/allure-2.13.8.zip
-        unzip allure-2.13.8.zip -d /opt/
-        sudo ln -s /opt/allure-2.13.8/bin/allure /usr/bin/allure
+        brew install allure
 
     - name: Generate Allure report
       run: npm run allure:report

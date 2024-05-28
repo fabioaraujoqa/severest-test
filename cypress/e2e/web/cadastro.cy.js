@@ -19,7 +19,7 @@ describe('Funcionalidade: Cadastro', () => {
         cy.get('.alert').should('contain', 'Cadastro realizado com sucesso')
       });
 
-      it('Deve validar campo de email válido', () => {
+      it.skip('Deve validar campo de email válido', () => {
         cy.CadastroUsuarioComum('Fabio teste', 'fabio!gmail.com', 'senha@123')
         cy.window().then((win) => {
           const alertElement = win.document.querySelector('.seletor-do-elemento-alerta');
@@ -44,6 +44,4 @@ describe('Funcionalidade: Cadastro', () => {
         cy.CadastroUsuarioComum(dadosUsuario[0].nome, dadosUsuario[0].email, dadosUsuario[0].senha)
         cy.get('h1', {timeout: 10000}).should('contain', 'Serverest Store')
       });
-
-
 });

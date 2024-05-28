@@ -9,7 +9,7 @@ describe('Funcionalidade: Login', () => {
 
     it('Deve fazer login com sucesso', () => {
         cy.login('fabio@araujo.com','teste@123')
-        cy.get('h1').should('contain' , 'Serverest Store')
+        cy.get('h1').should('contain' , 'Bem Vindo')
         //cy.get('.lead').should('contain' , 'Este é seu sistema para administrar seu ecommerce.')
     });
 
@@ -28,7 +28,7 @@ describe('Funcionalidade: Login', () => {
         cy.fixture('login').then((dadosLogin) =>{
             cy.login(dadosLogin.email, dadosLogin.senha)
         })
-        cy.get('h1').should('contain' , 'Serverest Store')
+        cy.get('h1').should('contain' , 'Bem Vindo')
 
 
 

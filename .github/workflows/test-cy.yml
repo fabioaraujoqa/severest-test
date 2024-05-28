@@ -21,5 +21,12 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
-    - run: npm install -f
-    - run: npm run cypress:report
+
+    - name: subir servidor do Serverest
+      run: nohup npm run start &
+
+    - name: Instalar dependencias do node
+      run: npm install -f
+
+    - name: Executar os tests
+      run: npm run cypress:report

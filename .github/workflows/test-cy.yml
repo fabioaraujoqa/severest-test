@@ -22,4 +22,4 @@ jobs:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
     - run: npm install -f
-    - run: npm test
+    - run: npm run cypress:report

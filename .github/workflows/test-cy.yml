@@ -32,12 +32,12 @@ jobs:
       run: npm run cypress:report
 
     - name: Gerar relatório Allure
-      run: npm run allure:generate  # Certifique-se de que este script está definido no seu package.json
+      run: npm run allure:generate  
 
     - name: Publicar relatório Allure no GitHub Pages
       if: always()
       uses: peaceiris/actions-gh-pages@v3
       with:
         github_token: ${{ secrets.GH_TOKEN }}
-        publish_dir: ./allure-results  # Ajuste este caminho conforme necessário
+        publish_dir: ./allure-report  
         publish_branch: gh-pages

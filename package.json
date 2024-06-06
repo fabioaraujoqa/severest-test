@@ -7,7 +7,8 @@
     "test": "npx cypress run --browser chrome",
     "start": "npx serverest -y",
     "cypress:report": "npx cypress run --record --key 5f11331a-2db1-4ee0-b132-57d482d936d6",
-    "allure:report": "npx allure serve allure-results"
+    "allure:report": "npx allure serve allure-results", 
+    "allure:generate": "allure generate allure-results --clean -o allure-report"
   },
   "keywords": [],
   "author": "",

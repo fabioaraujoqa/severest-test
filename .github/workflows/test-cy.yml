@@ -1,4 +1,3 @@
-
 name: Node.js CI
 
 on:
@@ -16,17 +15,29 @@ jobs:
 
     steps:
     - uses: actions/checkout@v4
+
     - name: Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v3
       with:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
 
-    - name: subir servidor do Serverest
+    - name: Subir servidor do Serverest
       run: nohup npm run start &
 
-    - name: Instalar dependencias do node
+    - name: Instalar dependências do node
       run: npm install -f
 
     - name: Executar os tests
       run: npm run cypress:report
+
+    - name: Gerar relatório Allure
+      run: npm run allure:generate  # Certifique-se de que este script está definido no seu package.json
+
+    - name: Publicar relatório Allure no GitHub Pages
+      if: always()
+      uses: peaceiris/actions-gh-pages@v3
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: ./allure-report  # Ajuste este caminho conforme necessário
+        publish_branch: gh-pages

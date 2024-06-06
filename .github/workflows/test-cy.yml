@@ -31,13 +31,22 @@ jobs:
     - name: Executar os testes
       run: npm run cypress:report
 
+    - name: Verificar resultados dos testes
+      run: ls -la allure-results  # Certifique-se de que os arquivos de resultados estão presentes
+
     - name: Gerar relatório Allure
-      run: npm run allure:generate  
+      run: npm run allure:generate  # Gera o relatório Allure
+
+    - name: Verificar relatório Allure
+      run: ls -la allure-report  # Verifique se os arquivos HTML estão presentes
+
+    - name: Criar arquivo .nojekyll
+      run: echo "" > allure-report/.nojekyll
 
     - name: Publicar relatório Allure no GitHub Pages
       if: always()
       uses: peaceiris/actions-gh-pages@v3
       with:
         github_token: ${{ secrets.GH_TOKEN }}
-        publish_dir: ./allure-report  
+        publish_dir: ./allure-report  # Diretório correto
         publish_branch: gh-pages
